@@ -19,24 +19,25 @@ except Author.DoesNotExist:
 
 
 # Querying the database to retrieve all libraries
-Libraryname = input("Enter the name of the library you want to search for: ")
+library_name = input("Enter the name of the library you want to search for: ")
 try:
-    library = Library.objects.get(name=Libraryname)
+    library = Library.objects.get(name=library_name)
     print(f"Library found: {library.name}, Location: {library.location}")
     
     # Retrieve all books available in the library
     books_in_library = library.books.all()
     if books_in_library.exists():
+
         print("Books available in this library:")
         for book in books_in_library:
             print(f"* {book.title} (Published on: {book.published_date})")
     else:
         print("No books found in this library.")
 except Library.DoesNotExist:
-    print(f"No library found with the name '{Libraryname}'. Try another name, Thank you!")
+    print(f"No library found with the name '{library_name}'. Try another name, Thank you!")
 
 try:
-    Librarian = Librarian.objects.get(Libraryname= Libraryname)
+    Librarian = Librarian.objects.get(Libraryname= library_name)
     print(f"Librarian found: {Librarian.name} for the library {library.name}")
 except Librarian.DoesNotExist:
-    print(f"No librarian found in'{Libraryname}'. Try another name, Thank you!")
+    print(f"No librarian found in'{library_name}'. Try another name, Thank you!")
