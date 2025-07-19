@@ -1,9 +1,9 @@
 from models import Author, Book, Library, Librarian
 
 # Querying the database to retrieve all authors
-Authorname = input("Enter the name of the author you want to search for: ")
+author_name = input("Enter the name of the author you want to search for: ")
 try:
-    author = Author.objects.get(name=Authorname)
+    author = Author.objects.get(name=author_name)
     print(f"Author found: {author.name}")
     
     # Retrieve all books written by the author
@@ -15,7 +15,7 @@ try:
     else:
         print("No books found for this author.")
 except Author.DoesNotExist:
-    print(f"No author found with the name '{Authorname}'.  Try another name, Thank you!")
+    print(f"No author found with the name '{author_name}'.  Try another name, Thank you!")
 
 
 # Querying the database to retrieve all libraries
