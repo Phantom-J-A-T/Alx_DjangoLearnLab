@@ -7,7 +7,7 @@ def list_books(request):
     response = "Books List"
     for book in books:
         response += f"* {book.title} by {book.author.name} - Published on {book.published_date}."
-    return render(request, 'relationship_app/templates/list_books.html', {'books': books, 'response': response})
+    return render(request, 'relationship_app/list_books.html', {'books': books, 'response': response})
 
 class LibraryDetailView(DetailView):
     model = Library
