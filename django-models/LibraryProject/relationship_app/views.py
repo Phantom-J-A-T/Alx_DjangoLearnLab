@@ -7,6 +7,8 @@ from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import permission_required
+from .models import Book, Author
 
 def register(request):
     if request.method == 'POST':
@@ -81,3 +83,48 @@ def is_member(user):
 
 def member_dashboard(request):
     return render(request, 'relationship_app/member_view.html')
+
+
+@permission_required('relationship_app.can_add_book', raise_exception=True)
+@login_required
+def add_book(request):
+    if request.method == 'POST':
+        title = request.POST['title']
+        author_name = request.POST['author']
+        published_date = request.POST['published_date']
+        
+        author = Author.objects.get_or_create(name=author_name)
+        Book.objects.create(title=title, author=author, published_date=published_date)
+        
+        return redirect('list_books')
+    authors = Author.objects.all()
+    return render(request, 'relationship_app/add_book.html', {'authors': authors})
+
+@permission_required('relationship_app.can_view_book', raise_exception=True)
+@login_required
+def view_book(request, book_id):
+    book = Book.objects.get(id=book_id)
+    return render(request, 'relationship_app/view_book.html', {'book': book})
+
+@permission_required('relationship_app.can_change_book', raise_exception=True)
+@login_required
+def change_book(request, book_id):
+    book = Book.objects.get(id=book_id)
+    if request.method == 'POST':
+        book.title = request.POST['title']
+        author_name = request.POST['author']
+        book.author = Author.objects.get_or_create(name=author_name)[0]
+        book.published_date = request.POST['published_date']
+        book.save()
+        return redirect('list_books')
+    authors = Author.objects.all()
+    return render(request, 'relationship_app/change_book.html', {'book': book, 'authors': authors})
+
+@permission_required('relationship_app.can_delete_book', raise_exception=True)
+@login_required
+def delete_book(request, book_id):
+    book = Book.objects.get(id=book_id)
+    if request.method == 'POST':
+        book.delete()
+        return redirect('list_books')
+    return render(request, 'relationship_app/delete_book.html', {'book': book})

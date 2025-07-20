@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book List</title>
+</head>
+<body>
+    <h1>All Books</h1>
+
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user.username }}!</p>
+        {% if perms.relationship_app.can_add_book %}
+            <a href="{% url 'add_book' %}">➕ Add New Book</a>
+        {% endif %}
+    {% endif %}
+
+    {% if books %}
+        <ul>
+            {% for book in books %}
+                <li>
+                    <strong>{{ book.title }}</strong> by {{ book.author.name }}
+                    {% if perms.relationship_app.can_change_book %}
+                        | <a href="{% url 'edit_book' book.id %}">✏️ Edit</a>
+                    {% endif %}
+                    {% if perms.relationship_app.can_delete_book %}
+                        | <a href="{% url 'delete_book' book.id %}">🗑️ Delete</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No books available.</p>
+    {% endif %}
+
+    <p><a href="{% url 'logout' %}">🚪 Logout</a></p>
+</body>
+</html>
