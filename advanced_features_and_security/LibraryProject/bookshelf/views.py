@@ -3,10 +3,13 @@ from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import UserProfile
 from .forms import UserProfileForm
+from django.http import HttpResponse
 
 # Create your views here.
 def home(request):
-    return render(request, 'relationship_app/home.html')
+    response = HttpResponse("Welcome to Library Project!")
+    response['Content-Security-Policy'] = "default-src 'self'; script-src 'self'; style-src 'self'"
+    return response
 
 @permission_required('relationship_app.can_create_userprofile', raise_exception=True)
 def create_profile(request):
