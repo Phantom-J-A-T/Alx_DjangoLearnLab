@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import BaseUserManager
+from django.core.validators import FileExtensionValidator
 
 # Create your models here.
 class Book(models.Model):
@@ -11,7 +12,7 @@ class Book(models.Model):
 class CustomUser(AbstractUser):
    date_of_birth = models.DateField(null=True, blank=True)
    profile_photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True, 
-                                     validators=[models.FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])])
+                                     validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])])
    
 
 class CustomUserManager(BaseUserManager):

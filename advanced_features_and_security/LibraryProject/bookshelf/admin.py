@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Book
 from django.contrib.auth.admin import UserAdmin
+from .models import CustomUser
 
 # Register your models here.
 @admin.register(Book)
@@ -14,7 +15,7 @@ class BookAdmin(admin.ModelAdmin):
 
 
 class ModelAdmin (UserAdmin):
-    model = UserAdmin.model
+    model = CustomUser
     fieldsets = UserAdmin.fieldsets + (
         (None, {'fields': ('date_of_birth', 'profile_photo')}),
     )
@@ -26,4 +27,4 @@ class ModelAdmin (UserAdmin):
     search_fields = ('username', 'email', 'is_staff', 'is_superuser', 'is_active')
     ordering = ('username','email', 'first_name', 'last_name')
 
-admin.site.register(UserAdmin.model, ModelAdmin )
+admin.site.register(CustomUser, ModelAdmin )
