@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Project - Home</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 0;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        footer {
+            background-color: #ddd;
+            padding: 1rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Welcome to the Library Project</h1>
+</header>
+
+<main>
+    <p>This is the home page of your Django application.</p>
+    <p>Use the navigation or links below to explore.</p>
+
+    <div>
+        <a href="{% url 'admin:index' %}">Go to Admin Panel</a>
+        <!-- You can add more links here -->
+    </div>
+</main>
+
+<footer>
+    &copy; {{ now|date:"Y" }} Library Project. All rights reserved.
+</footer>
+
+</body>
+</html>

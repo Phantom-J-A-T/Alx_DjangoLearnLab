@@ -15,7 +15,7 @@ class CustomUser(AbstractUser):
                                      validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])])
    
    class Meta:
-       permissons = [
+       permissions = [
             ("can_view_userprofile", "Can view user profile"),
             ("can_create_userprofile", "Can create user profile"),
             ("can_edit_userprofile", "Can edit user profile"),
