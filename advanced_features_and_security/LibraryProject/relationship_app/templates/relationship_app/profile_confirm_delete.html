@@ -1,0 +1,6 @@
+<h2>Are you sure you want to delete the profile: {{ profile }}?</h2>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, delete</button>
+</form>
+<a href="{% url 'profile_list' %}">Cancel</a>
