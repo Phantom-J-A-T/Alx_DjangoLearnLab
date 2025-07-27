@@ -85,6 +85,7 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 # Allow site to be included in browser HSTS preload lists
 SECURE_HSTS_PRELOAD = True
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ROOT_URLCONF = 'LibraryProject.urls'
 
