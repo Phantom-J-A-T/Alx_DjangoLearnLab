@@ -58,6 +58,21 @@ CSP_STYLE_SRC = ("'self'", 'https://fonts.googleapis.com')
 CSP_FONT_SRC = ("'self'", 'https://fonts.gstatic.com')
 CSP_IMG_SRC = ("'self'", 'data:', 'https://yourcdn.com')
 
+# Mitigates reflected XSS attacks in older browsers
+SECURE_BROWSER_XSS_FILTER = True
+
+# Prevents clickjacking by not allowing your site to be rendered in an iframe
+X_FRAME_OPTIONS = 'DENY'  # Or 'SAMEORIGIN' if you need iframe access on same domain
+
+# Prevents content sniffing
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Ensure CSRF cookies are only sent over HTTPS (True in production)
+CSRF_COOKIE_SECURE = False  # Change to True in production
+
+# Ensures session cookies are sent over HTTPS only (True in production)
+SESSION_COOKIE_SECURE = False  # Change to True in production
+
 ROOT_URLCONF = 'LibraryProject.urls'
 
 TEMPLATES = [
