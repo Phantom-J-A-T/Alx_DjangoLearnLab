@@ -14,6 +14,14 @@ class CustomUser(AbstractUser):
    profile_photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True, 
                                      validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])])
    
+   class Meta:
+       permissons = [
+            ("can_view_userprofile", "Can view user profile"),
+            ("can_create_userprofile", "Can create user profile"),
+            ("can_edit_userprofile", "Can edit user profile"),
+            ("can_delete_userprofile", "Can delete user profile"),
+       ]
+   
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, username, email, password=None, **extra_fields):

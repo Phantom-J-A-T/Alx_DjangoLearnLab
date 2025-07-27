@@ -9,6 +9,7 @@ class UserProfile(models.Model):
         ('librarian', 'Librarian'),
         ('member', 'Member'),
     )
+    
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='member')
