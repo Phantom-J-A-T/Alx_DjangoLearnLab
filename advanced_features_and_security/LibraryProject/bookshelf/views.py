@@ -5,6 +5,7 @@ from .models import UserProfile
 from .models import Book
 from .forms import UserProfileForm
 from .forms import BookForm
+from .forms import ExampleForm
 from django.http import HttpResponse
 
 # Create your views here.
@@ -63,3 +64,10 @@ def create_book(request):
     else:
         form = BookForm()
     return render(request, 'relationship_app/form_example.html', {'form': form, 'title': 'Add Book'})
+
+def example_view(request):
+    form = ExampleForm(request.POST or None)
+    if form.is_valid():
+        # Do something with the form data
+        pass
+    return render(request, 'bookshelf/example_form.html', {'form': form})
