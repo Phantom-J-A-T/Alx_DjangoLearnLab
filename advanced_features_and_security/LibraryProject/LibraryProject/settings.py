@@ -73,6 +73,19 @@ CSRF_COOKIE_SECURE = False  # Change to True in production
 # Ensures session cookies are sent over HTTPS only (True in production)
 SESSION_COOKIE_SECURE = False  # Change to True in production
 
+# Redirect all HTTP requests to HTTPS
+SECURE_SSL_REDIRECT = True
+
+# HTTP Strict Transport Security (HSTS) - one year (in seconds)
+SECURE_HSTS_SECONDS = 31536000
+
+# Apply HSTS to all subdomains (e.g., www.example.com, api.example.com)
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+# Allow site to be included in browser HSTS preload lists
+SECURE_HSTS_PRELOAD = True
+
+
 ROOT_URLCONF = 'LibraryProject.urls'
 
 TEMPLATES = [
