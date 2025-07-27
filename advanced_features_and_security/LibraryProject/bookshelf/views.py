@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import UserProfile
+from .models import Book
 from .forms import UserProfileForm
+from .forms import BookForm
 from django.http import HttpResponse
 
 # Create your views here.
@@ -47,3 +49,17 @@ def delete_profile(request, pk):
 def profile_list(request):
     profiles = UserProfile.objects.all()
     return render(request, 'relationship_app/profile_list.html', {'profiles': profiles})
+
+def book_list(request):
+    books = Book.objects.all()
+    return render(request, 'relationship_app/book_list.html', {'books': books})
+
+def create_book(request):
+    if request.method == 'POST':
+        form = BookForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('book_list')
+    else:
+        form = BookForm()
+    return render(request, 'relationship_app/form_example.html', {'form': form, 'title': 'Add Book'})

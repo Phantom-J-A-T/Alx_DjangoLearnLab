@@ -1,0 +1,81 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title|default:"Form" }}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f9f9f9;
+            padding: 2rem;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 2rem;
+            max-width: 500px;
+            margin: auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        form p {
+            margin-bottom: 1.2rem;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.6rem;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.2rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .errorlist {
+            color: #e53935;
+            list-style-type: none;
+            padding-left: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>{{ title|default:"Fill the Form" }}</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+</body>
+</html>
