@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics
+from rest_framework import filters
 from rest_framework import permissions
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from .models import Book
@@ -15,6 +16,7 @@ class ListView(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]  # allow unauthenticated users to read, but authenticated users to write
     filter_backends = [DjangoFilterBackend]  # Using DjangoFilterBackend to enable filtering
     filterset_class = [BookFilter]  # Adding filter backend to allow filtering of books
+    search_fields = ['title', 'author__name']  # Enabling search functionality on title and author name
 
 
 class DetailView(generics.RetrieveAPIView):
