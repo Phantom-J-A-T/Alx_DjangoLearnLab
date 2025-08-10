@@ -9,10 +9,12 @@ from .serializers import BookSerializer
 class ListView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    permission_classes = [permissions.AllowAny]  # allow unauthenticated users to read, but authenticated users to write
 
 class DetailView(generics.RetrieveAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    permission_classes = [permissions.AllowAny]  # allow unauthenticated users to read, but authenticated users to write
 
 class CreateView(generics.CreateAPIView):
     queryset = Book.objects.all()
@@ -35,3 +37,8 @@ class UpdateView(generics.UpdateAPIView):
 class DeleteView(generics.DestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    permission_classes = [permissions.IsAuthenticated]  # restrict deletion to authenticated users
+
+    def perform_destroy(self, instance):
+        # Giving the authenticated user the ability to delete a book
+        instance.delete()
