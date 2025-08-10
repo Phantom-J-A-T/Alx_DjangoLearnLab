@@ -17,6 +17,8 @@ class ListView(generics.ListAPIView):
     filter_backends = [DjangoFilterBackend]  # Using DjangoFilterBackend to enable filtering
     filterset_class = [BookFilter]  # Adding filter backend to allow filtering of books
     search_fields = ['title', 'author__name']  # Enabling search functionality on title and author name
+    ordering_fields = ['title, publication_year']  # Allowing ordering by publication year and title
+    ordering = ['publication_year']  # Default ordering by publication year
 
 
 class DetailView(generics.RetrieveAPIView):
