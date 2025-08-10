@@ -7,6 +7,7 @@ from .models import Book
 from .serializers import BookSerializer
 from .filters import BookFilter
 from django_filters.rest_framework import DjangoFilterBackend
+#from django_filters import rest_framework
 
 # Create your views here.
  # Implememting Generic views for the Book model   
