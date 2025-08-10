@@ -9,6 +9,7 @@ from .filters import BookFilter
 from django_filters.rest_framework import DjangoFilterBackend
 #from django_filters import rest_framework
 
+
 # Create your views here.
  # Implememting Generic views for the Book model   
 class ListView(generics.ListAPIView):
@@ -53,3 +54,7 @@ class DeleteView(generics.DestroyAPIView):
     def perform_destroy(self, instance):
         # Giving the authenticated user the ability to delete a book
         instance.delete()
+
+
+#filters.OrderingFilter
+#filters.SearchFilter
