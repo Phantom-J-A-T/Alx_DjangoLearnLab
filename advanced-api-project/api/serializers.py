@@ -11,7 +11,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 # Serializers for Book with Fields for the title, author, and publication year
 class BookSerializer(serializers.ModelSerializer):
     # Nested serializer for author to include author details in book serialization
-    author = AuthorSerializer(read_only=True)
+    author = AuthorSerializer(many=True, read_only=True)
 
     class Meta:
         model = Book
