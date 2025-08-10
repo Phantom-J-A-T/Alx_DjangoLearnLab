@@ -4,6 +4,8 @@ from rest_framework import permissions
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from .models import Book
 from .serializers import BookSerializer
+from .filters import BookFilter
+from django_filters.rest_framework import DjangoFilterBackend
 
 # Create your views here.
  # Implememting Generic views for the Book model   
@@ -11,6 +13,9 @@ class ListView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]  # allow unauthenticated users to read, but authenticated users to write
+    filter_backends = [DjangoFilterBackend]  # Using DjangoFilterBackend to enable filtering
+    filterset_class = [BookFilter]  # Adding filter backend to allow filtering of books
+
 
 class DetailView(generics.RetrieveAPIView):
     queryset = Book.objects.all()
