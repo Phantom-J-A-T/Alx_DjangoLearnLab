@@ -1,3 +1,25 @@
-<h2>Welcome, {{ user.username }}!</h2>
-<p>Email: {{ user.email }}</p>
-<a href="{% url 'logout' %}">Logout</a>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Profile</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="profile-container">
+    <h2>Welcome, {{ user.username }}!</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+</div>
+</body>
+</html>

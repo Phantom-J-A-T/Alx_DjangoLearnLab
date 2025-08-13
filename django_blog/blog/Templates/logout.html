@@ -1,8 +1,16 @@
-{% extends "base.html" %}
-
-{% block content %}
-<h2>Logged Out</h2>
-<p>You have been successfully logged out.</p>
-
-<a href="{% url 'login' %}">Click here to log in again</a>
-{% endblock %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logout</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="auth-container">
+    <h2>Logged Out</h2>
+    <p>You have been successfully logged out.</p>
+    <a href="{% url 'login' %}" class="btn">Login Again</a>
+</div>
+</body>
+</html>
