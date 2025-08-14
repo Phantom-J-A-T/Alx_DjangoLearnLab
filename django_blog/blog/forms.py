@@ -26,3 +26,14 @@ class PostForm(forms.ModelForm):
         if len(title) < 5:
             raise forms.ValidationError("Title must be at least 5 characters long.")
         return title
+    
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['content']
+        widgets = {
+            'content': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+        }
+        labels = {
+            'content': 'Comment',
+        }
