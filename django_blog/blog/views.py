@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm
 from django.contrib import messages
+from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView
+from .models import Post
 
 # Create your views here.
 @login_required
@@ -43,3 +45,42 @@ def posts(request):
         {'id': 3, 'title': 'Last Post'},
     ]
     return render(request, 'blog/posts.html', {'posts': posts_list})
+
+
+class PostListView(ListView):
+    model = Post
+    template_name = 'blog/posts.html'
+    context_object_name = 'posts'
+
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'blog/post_detail.html'
+    context_object_name = 'post'
+
+class PostCreateView(CreateView):
+    model = Post
+    template_name = 'blog/post_form.html'
+    fields = ['title', 'content']
+    success_url = '/posts/'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+class PostUpdateView(UpdateView):
+    model = Post
+    template_name = 'blog/post_form.html'
+    fields = ['title', 'content']
+    success_url = '/posts/'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
+class PostDeleteView(DeleteView):
+    model = Post
+    template_name = 'blog/post_confirm_delete.html'
+    success_url = '/posts/'
+
+    def get_queryset(self):
+        return self.model.objects.filter(author=self.request.user)
