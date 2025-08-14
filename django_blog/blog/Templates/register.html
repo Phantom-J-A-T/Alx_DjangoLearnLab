@@ -1,9 +1,12 @@
-{% load static %}
+{% extends "blog/base.html" %}
 
-{% extends "blog/_base.html" %} {% block content %}
-<h2>Sign Up</h2>
-<form method="post" action="{% url 'register' %}">
-  {% csrf_token %} {{ form.as_p }}
-  <input type="submit" value="Signup" />
+{% block title %}Register - Django Blog{% endblock %}
+
+{% block content %}
+<h2>Register</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
 </form>
 {% endblock %}
