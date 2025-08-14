@@ -4,7 +4,9 @@ from django.urls import path
 
 urlpatterns = [
     # Home page
-    path('', views.index, name='index'),
+    path('', views.home, name='home'),
+
+    path('posts/', views.posts, name='posts'), 
     
     # Blog post detail view
     path('post/<int:post_id>/', views.post_detail, name='post_detail'),
