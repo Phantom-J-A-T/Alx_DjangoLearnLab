@@ -7,6 +7,8 @@ urlpatterns = [
     path('', views.home, name='home'),
 
     path('posts/', views.posts, name='posts'), 
+
+    path('profile/', views.profile, name='profile'),
     
     # Blog post detail view
     path('post/<int:post_id>/', views.post_detail, name='post_detail'),
