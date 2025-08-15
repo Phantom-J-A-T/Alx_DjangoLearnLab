@@ -51,6 +51,16 @@ def posts(request):
     ]
     return render(request, 'blog/posts.html', {'posts': posts_list})
 
+def create_post(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('post-list')  # Change to your post list route
+    else:
+        form = PostForm()
+    return render(request, 'blog/create_post.html', {'form': form})
+
 
 class PostListView(ListView):
     model = Post

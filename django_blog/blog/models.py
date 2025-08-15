@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from taggit.managers import TaggableManager
 
 # Create your models here.
 class blog(models.Model):
@@ -25,6 +26,8 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    tags = TaggableManager(blank=True)
+
     def __str__(self):
         return self.title
 
@@ -44,3 +47,12 @@ class Comment(models.Model):
     
     def get_absolute_url(self):
         return reverse('post_detail', args=[str(self.post.id)])
+
+class Tag(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    posts = models.ManyToManyField(Post, related_name='tags')
+
+    def __str__(self):
+        return self.name
+    def get_absolute_url(self):
+        return reverse('tag_detail', args=[str(self.id)])

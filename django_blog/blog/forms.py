@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import Post, Comment
 
+
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True, help_text='Required. Enter a valid email address.')
     class  Meta:
@@ -19,7 +20,7 @@ class CustomUserCreationForm(UserCreationForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content']  # Author will be set automatically
+        fields = ['title', 'content', 'tags']  # Author will be set automatically
 
     def clean_title(self):
         title = self.cleaned_data.get('title')
