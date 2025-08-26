@@ -43,3 +43,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'email', 'bio', 'profile_picture', 'followers', 'following']
         read_only_fields = ['id', 'username', 'followers', 'following']
+
+
+# get_user_model().objects.create_user
