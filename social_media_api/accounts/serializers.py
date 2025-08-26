@@ -13,6 +13,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'email', 'password', 'bio', 'profile_picture']
 
     def create(self, validated_data):
+        # Use get_user_model() instead of direct CustomUser import
         user = User.objects.create_user(
             username=validated_data['username'],
             email=validated_data.get('email'),
@@ -20,7 +21,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
             bio=validated_data.get('bio', ''),
             profile_picture=validated_data.get('profile_picture', None)
         )
-        Token.objects.create(user=user)  # create token automatically
+        Token.objects.create(user=user)  # create token on registration
         return user
 
 
