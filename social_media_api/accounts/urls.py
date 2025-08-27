@@ -12,3 +12,6 @@ urlpatterns = [
     path("profile/", ProfileView.as_view(), name="profile"),
     path('', include(router.urls)),  # Include the router URLs
 ]
+
+#   path("unfollow/<int:user_id>/", views.CustomUserViewSet.as_view({"post": "unfollow"}), name="unfollow-user"),
+# path("follow/<int:user_id>/", views.CustomUserViewSet.as_view({"post": "follow"}), name="follow-user"),
