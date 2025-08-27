@@ -11,6 +11,5 @@ urlpatterns = [
     path('feed/', FeedView.as_view(), name='user-feed'),
 ]
 
-
-# path("follow/<int:user_id>/", views.CustomUserViewSet.as_view({"post": "follow"}), name="follow-user"),
 #   path("unfollow/<int:user_id>/", views.CustomUserViewSet.as_view({"post": "unfollow"}), name="unfollow-user"),
+# path("follow/<int:user_id>/", views.CustomUserViewSet.as_view({"post": "follow"}), name="follow-user"),
